@@ -5,6 +5,7 @@ import products from "../assets/products.js";
 export default function Home() {
   return (
     <div className=" flex flex-col bg-[#FFFFFF] text-3xl h-auto min-h-[360px]">
+    <div className=" flex flex-col bg-[#FFFFFF] text-3xl h-auto min-h-[360px]">
       <div className="flex justify-center  w-full">
         <Carousel />
       </div>
@@ -14,5 +15,11 @@ export default function Home() {
         ))}
       </div>
     </div>
+    </div>
   );
+  // return (
+  //   <div className="bg-[#cddae1] text-3xl h-auto min-h-[360px] flex items-center justify-center">
+  //     <ProductCard />
+  //   </div>
+  // );
 }

@@ -7,6 +7,7 @@ const products = [
     originalPrice: 999,
     discountPercent: 10,
     discountedPrice: 899.9,
+    navigate: "/customizedProduct",
   },
   {
     id: 2,
