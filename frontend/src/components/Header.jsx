@@ -187,7 +187,7 @@ const Header = () => {
               <button className="relative p-2 rounded-md text-gray-700 hover:text-black">
                 <ShoppingCart className="w-6 h-6" />
                 {products.length > 0 && (
-                  <span className="absolute -top-1 -right-1 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full bg-green-500">
+                  <span className="absolute -top-1 -right-1 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full bg-cartBackgroundColor">
                     {products.length}
                   </span>
                 )}
