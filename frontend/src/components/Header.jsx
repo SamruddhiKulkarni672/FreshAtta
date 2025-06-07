@@ -21,8 +21,8 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-md">
-      <div className="w-full   px-4 py-2 md:py-3 flex items-center justify-between ">
+    <header className="sticky top-0 z-50 bg-white shadow-md text-headerTextColor">
+      <div className="w-full   px-4 py-2 md:py-5 flex items-center justify-between ">
         <div className="flex items-center space-x-8">
           {/* Logo */}
           <div className="relative w-24 md:w-32 lg:w-40 h-8 ">
@@ -37,7 +37,7 @@ const Header = () => {
           </div>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex    space-x-6 lg:space-x-12 text-sm font-medium text-gray-700 ">
+          <div className="hidden md:flex    space-x-6 lg:space-x-12 text-sm  font-semibold  ">
             <Link href="/" className="hover:text-green-700 transition">
               Home
             </Link>
@@ -57,28 +57,31 @@ const Header = () => {
         </div>
 
         {/* Desktop Right Section */}
-        <div className="hidden md:flex lg:mr-4 space-x-4 items-center">
-          <div className="border px-2 py-1 bg-serachBackgroundColor rounded-md">
+        <div className="hidden md:flex lg:mr-4 space-x-2 items-center">
+          <div className="border px-2 py-2 bg-serachBackgroundColor rounded-md flex items-center">
             <button onClick={handleSearch} className="hover:bg-gray-100">
-              <Search className="w-5 h-5 text-black" />
+              <Search className="w-4 h-4 text-black" />
             </button>
           </div>
-
-          <Link href="/cart">
-            <button className="relative p-2 rounded-md text-gray-700 hover:text-black">
-              <ShoppingCart className="w-6 h-6" />
-              {products.length > 0 && (
-                <span className="absolute -top-1 -right-1 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full bg-cartBackgroundColor">
-                  {products.length}
-                </span>
-              )}
-            </button>
-          </Link>
+          <div className="relative border px-2 py-2 flex items-center bg-serachBackgroundColor rounded-md">
+            <Link href="/cart">
+              <div className="relative w-4 h-4">
+                {" "}
+                {/* You can use w-5 or w-8 depending on icon size */}
+                <Image
+                  src="/images/Shopping-bag.svg"
+                  alt="Shopping Bag Icon"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+            </Link>
+          </div>
 
           <Link href="/login">
             <Button
               variant="default"
-              className="px-2 py-1 rounded-[6px] bg-cartBackgroundColor"
+              className="px-2 py-1 text-white rounded-[6px] bg-cartBackgroundColor"
             >
               Sign In
             </Button>
@@ -99,7 +102,7 @@ const Header = () => {
 
       {/* Mobile Dropdown Menu */}
       {isMenuOpen && (
-        <div className="md:hidden px-4 py-3 space-y-3 bg-white shadow border-t border-gray-200">
+        <div className="md:hidden text-sm  font-semibold text-headerTextColor px-4 py-3 space-y-3 bg-white shadow border-t border-gray-200">
           <Link
             href="/"
             className="block text-gray-700"
@@ -142,7 +145,7 @@ const Header = () => {
           >
             <ShoppingCart className="w-5 h-5" /> Cart ({products.length})
           </Link>
-          <div className="mt-1">
+          <div className="mt-1 text-white">
             <Link href="/login" onClick={() => setIsMenuOpen(false)}>
               <Button variant="destructive" className="w-full">
                 Sign In
