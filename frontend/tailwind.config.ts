@@ -19,13 +19,14 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         productBackground: " #E7E2E2",
-        disocountBg: "#E9F0FF",
+        disocountBg: "#244316",
         productTextOriginal: "#81859C",
         discountColor: "#102B6B",
         productPriceColor: "#363842",
         cartBackgroundColor: "#D2874D",
         serachBackgroundColor: "#F0F0F0",
         headerTextColor: "#242424",
+
         chart: {
           "1": "hsl(var(--chart-1))",
           "2": "hsl(var(--chart-2))",

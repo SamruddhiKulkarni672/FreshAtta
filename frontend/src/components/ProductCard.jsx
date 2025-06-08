@@ -20,9 +20,13 @@ const ProductCard = ({ product }) => {
   return (
     <div
       onClick={handleNavigate}
-      className="cursor-pointer w-full max-w-[232px] h-auto rounded-[20px] sm:rounded-[28px] md:rounded-[34px] p- sm:p-4 bg-productBackground"
+      className="relative cursor-pointer w-full xl:w-[280px] max-w-[300px] h-auto rounded-[20px] sm:rounded-[28px] md:rounded-[34px] p-4  sm:p-4 bg-productBackground"
     >
-      <div className="flex flex-col h-full">
+      {/* Discount badge */}
+      <div className="absolute top-2 right-1 md:right-3 px-1 py-1 rounded bg-disocountBg text-white text-xs sm:text-sm font-semibold shadow">
+        -{product.discountPercent}%
+      </div>
+      <div className="flex flex-col h-full pt-4 sm:pt-0">
         {/* Image */}
         <div className="h-[140px] sm:h-[160px] md:h-[180px] rounded-[12px] sm:rounded-[15px] flex items-center justify-center">
           <Image
@@ -56,9 +60,9 @@ const ProductCard = ({ product }) => {
               <FaIndianRupeeSign />
               {product.originalPrice}
             </div>
-            <div className="text-xs sm:text-sm px-2 py-1 rounded bg-disocountBg text-discountColor">
+            {/* <div className="text-xs sm:text-sm px-2 py-1 rounded bg-disocountBg text-discountColor">
               -{product.discountPercent}%
-            </div>
+            </div> */}
           </div>
 
           <div className="flex justify-between items-center mt-3">

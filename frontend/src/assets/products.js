@@ -45,6 +45,33 @@ const products = [
     discountPercent: 5,
     discountedPrice: 664.05,
   },
+  {
+    id: 6,
+    name: "Premium Wheat Flour",
+    image: "/images/aata2.svg",
+    rating: 5,
+    originalPrice: 1099,
+    discountPercent: 20,
+    discountedPrice: 879.2,
+  },
+  {
+    id: 7,
+    name: "Organic Ragi Atta",
+    image: "/images/aata3.svg",
+    rating: 3,
+    originalPrice: 849,
+    discountPercent: 8,
+    discountedPrice: 781.08,
+  },
+  {
+    id: 8,
+    name: "Bajra Flour",
+    image: "/images/aata4.svg",
+    rating: 4,
+    originalPrice: 899,
+    discountPercent: 12,
+    discountedPrice: 791.12,
+  },
 ];
 
 export default products;
