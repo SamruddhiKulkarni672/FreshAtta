@@ -26,9 +26,7 @@ export default function RootLayout({
         className={`${inter.variable} ${poppins.variable} tracking-wide font-sans antialiased bg-white text-black`}
       >
         <Header />
-        <main className="px-4 sm:px-8 lg:px-16 max-w-screen-2xl mx-auto ">
-          {children}
-        </main>
+        <main className=" max-w-screen-2xl mx-auto ">{children}</main>
         <Footer />
       </body>
     </html>
