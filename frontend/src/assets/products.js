@@ -8,6 +8,9 @@ const products = [
     discountPercent: 10,
     discountedPrice: 899.9,
     navigate: "/customizedProduct",
+    description:
+      "A nutritious blend of multiple grains, perfect for a healthy and balanced diet.",
+    isCustomizedProduct: true,
   },
   {
     id: 2,
@@ -17,6 +20,9 @@ const products = [
     originalPrice: 1099,
     discountPercent: 20,
     discountedPrice: 879.2,
+    description:
+      "Finely milled premium wheat flour for soft, fluffy, and tasty rotis every time.",
+    isCustomizedProduct: false,
   },
   {
     id: 3,
@@ -26,6 +32,9 @@ const products = [
     originalPrice: 849,
     discountPercent: 8,
     discountedPrice: 781.08,
+    description:
+      "Naturally grown ragi flour, rich in calcium and fiber for a wholesome diet.",
+    isCustomizedProduct: false,
   },
   {
     id: 4,
@@ -35,6 +44,9 @@ const products = [
     originalPrice: 899,
     discountPercent: 12,
     discountedPrice: 791.12,
+    description:
+      "Traditional millet flour known for its high energy and digestive benefits.",
+    isCustomizedProduct: false,
   },
   {
     id: 5,
@@ -44,6 +56,9 @@ const products = [
     originalPrice: 699,
     discountPercent: 5,
     discountedPrice: 664.05,
+    description:
+      "Naturally gluten-free jowar flour, ideal for healthy rotis and gluten-sensitive diets.",
+    isCustomizedProduct: false,
   },
   {
     id: 6,
@@ -53,6 +68,9 @@ const products = [
     originalPrice: 1099,
     discountPercent: 20,
     discountedPrice: 879.2,
+    description:
+      "Finely milled premium wheat flour for soft, fluffy, and tasty rotis every time.",
+    isCustomizedProduct: false,
   },
   {
     id: 7,
@@ -62,6 +80,9 @@ const products = [
     originalPrice: 849,
     discountPercent: 8,
     discountedPrice: 781.08,
+    description:
+      "Naturally grown ragi flour, rich in calcium and fiber for a wholesome diet.",
+    isCustomizedProduct: false,
   },
   {
     id: 8,
@@ -71,6 +92,9 @@ const products = [
     originalPrice: 899,
     discountPercent: 12,
     discountedPrice: 791.12,
+    description:
+      "Traditional millet flour known for its high energy and digestive benefits.",
+    isCustomizedProduct: false,
   },
 ];
 

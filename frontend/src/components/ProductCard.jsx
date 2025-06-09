@@ -52,10 +52,15 @@ const ProductCard = ({ product }) => {
                 <FaRegStar key={i} className="text-xs sm:text-sm" />
               )
             )}
-            <LuMessageSquareMore className="ml-1 text-xs sm:text-sm" />
           </div>
-
-          <div className="flex mt-4 items-center justify-between">
+          <div>
+            <p className="text-sm text-gray-600 mt-2">
+              {product.description.length > 40
+                ? product.description.slice(0, 30) + "..."
+                : product.description}
+            </p>
+          </div>
+          <div className="flex mt-2 items-center justify-between">
             <div className="text-sm sm:text-base flex line-through leading-[1.2] text-productTextOriginal items-center gap-1">
               <FaIndianRupeeSign />
               {product.originalPrice}
@@ -65,14 +70,16 @@ const ProductCard = ({ product }) => {
             </div> */}
           </div>
 
-          <div className="flex justify-between items-center mt-3">
+          <div className="flex justify-between items-center mt-2">
             <div className="flex items-center gap-1 text-xl sm:text-2xl font-semibold text-productPriceColor">
               <FaIndianRupeeSign />
               {product.discountedPrice}
             </div>
-            <div className="w-[45px] sm:w-[55px] h-[45px] sm:h-[50px] rounded-[10px] sm:rounded-[13px] bg-cartBackgroundColor flex items-center justify-center">
-              <FiShoppingCart className="text-white text-lg sm:text-xl" />
-            </div>
+            {!product.isCustomizedProduct && (
+              <div className="w-[45px] sm:w-[55px] h-[45px] sm:h-[50px] rounded-[10px] sm:rounded-[13px] bg-cartBackgroundColor flex items-center justify-center">
+                <FiShoppingCart className="text-white text-lg sm:text-xl" />
+              </div>
+            )}
           </div>
         </div>
       </div>
