@@ -24,7 +24,7 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm text-headerTextColor">
-      <div className="container xl:mx-2 mx-auto px-4 xl:px-24 py-2 md:py-5 flex items-center justify-between ">
+      <div className="w-full max-w-screen-2xl mx-auto px-4 py-2 xl:px-24  md:py-5 flex items-center justify-between">
         {/* Logo */}
         <div className="relative w-24 md:w-32 lg:w-40 h-8">
           <Link href="/">
