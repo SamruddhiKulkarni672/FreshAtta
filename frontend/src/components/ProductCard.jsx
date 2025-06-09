@@ -20,12 +20,13 @@ const ProductCard = ({ product }) => {
   return (
     <div
       onClick={handleNavigate}
-      className="relative cursor-pointer w-full xl:w-[280px] max-w-[300px] h-auto rounded-[20px] sm:rounded-[28px] md:rounded-[34px] p-4  sm:p-4 bg-productBackground"
+      className="cursor-pointer w-full max-w-[232px] h-auto rounded-[20px] sm:rounded-[20px] md:rounded-[20px] p- sm:p-4 bg-productBackground"
     >
       {/* Discount badge */}
-      <div className="absolute top-2 right-1 md:right-3 px-1 py-1 rounded bg-disocountBg text-white text-xs sm:text-sm font-semibold shadow">
-        -{product.discountPercent}%
+      <div className="absolute top-2 right-1 md:right-3 px-1 py-1 rounded bg-[#41bf6d] text-white text-xs sm:text-sm font-semibold shadow">
+        -{product.discountPercent} 1%
       </div>
+
       <div className="flex flex-col h-full pt-4 sm:pt-0">
         {/* Image */}
         <div className="h-[140px] sm:h-[160px] md:h-[180px] rounded-[12px] sm:rounded-[15px] flex items-center justify-center">
@@ -37,6 +38,7 @@ const ProductCard = ({ product }) => {
             className="object-contain"
           />
         </div>
+         
 
         {/* Content */}
         <div className="mt-4 px-2 flex flex-col justify-between flex-1">
@@ -75,6 +77,12 @@ const ProductCard = ({ product }) => {
               <FaIndianRupeeSign />
               {product.discountedPrice}
             </div>
+            {product.isCustomizedProduct &&(
+                    <div className="w-[85px]   h-[45px] sm:h-[45px] rounded-[10px] sm:rounded-[13px] ml-2 bg-cartBackgroundColor flex items-center justify-center">
+                {/* <FiShoppingCart className="text-white text-lg sm:text-xl" /> */}
+                <span className=" text-white text-sm font-semibold ">checkout</span>
+              </div>
+            )}
             {!product.isCustomizedProduct && (
               <div className="w-[45px] sm:w-[55px] h-[45px] sm:h-[50px] rounded-[10px] sm:rounded-[13px] bg-cartBackgroundColor flex items-center justify-center">
                 <FiShoppingCart className="text-white text-lg sm:text-xl" />

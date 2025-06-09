@@ -12,7 +12,7 @@ export default {
       fontFamily: {
         inter: ["var(--font-inter)", "sans-serif"],
         poppins: ["var(--font-poppins)", "sans-serif"],
-        sans: ["var(--font-inter)", "sans-serif"], // Default for body
+        sans: ["var(--font-inter)", "sans-serif"], 
       },
 
       colors: {
