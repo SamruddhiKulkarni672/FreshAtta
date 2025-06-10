@@ -35,8 +35,8 @@ export default function CartPage() {
   };
  // console.log(cart.products.length);
   return (
-    <div className="max-w-6xl mx-auto xl:mx-22  p-6">
-      <h1 className="text-3xl font-bold mb-6">Shopping Cart</h1>
+    <div className="max-w-7xl mx-auto  py-6  ">
+      <h1 className="text-lg font-bold mb-6">Shopping Cart</h1>
 
       <div className="grid md:grid-cols-3 gap-8 ">
         {/* Cart Items */}
@@ -44,7 +44,8 @@ export default function CartPage() {
           {cart.products.map((item) => (
             <div
               key={item.id}
-              className="flex w-full items-center justify-between gap-4 border p-4 rounded-lg shadow-sm"
+              className="flex items-center justify-between gap-4 border-2 border-[#EAE2E2] p-4 rounded-lg shadow- md"
+              style={{ boxShadow: "6px 6px 6px 0px #DFD8D8" }}
             >
               <div className="flex w-[70%] items-center gap-4 cursor-pointer">
                 <Image
@@ -77,7 +78,7 @@ export default function CartPage() {
               </div> */}
 
               <div className="w-[20%]">
-                <p className="font-semibold">
+                <p className="font-semibold ml-3" >
                   ₹{(item.price * item.quantity).toFixed(2)}
                 </p>
               </div>
@@ -94,18 +95,18 @@ export default function CartPage() {
         </div>
 
         {/* Summary */}
-        <div className="border p-6 rounded-lg shadow-md space-y-4">
+        <div className="  p-6 bg-[#ebeaea] rounded-lg   space-y-4">
           <h2 className="text-xl font-semibold">Order Summary</h2>
           <div className="flex justify-between">
             <span>Subtotal</span>
             <span>₹{total}</span>
           </div>
-          <div className="flex justify-between">
+          <div className="flex justify-between text-[#7a7777]">
             <span>Shipping</span>
             <span>Free</span>
           </div>
           <div className="flex justify-between">
-            <span>{address}</span>
+            <span className="">address: {address}</span>
             {/* <button className="" onClick={() => setIsModelOpen(true)}>
               change address
             </button> */}
@@ -118,7 +119,7 @@ export default function CartPage() {
           </div>
           <button
             onClick={() => checkoutHandler()}
-            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+            className="w-full bg-[#D2874D] text-white py-2 rounded-lg hover:bg-[#a76f45] transition"
           >
             Checkout
           </button>

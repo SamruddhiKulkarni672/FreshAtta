@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react'
 
-const layout = () => {
-  return <div id="el-pv8aoj0m">
+const page = () => {
+   return <div id="el-pv8aoj0m">
           <h2  className="text-2xl font-bold text-gray-900 mb-6" id="el-ofama9xs">Customer Information</h2>
           
            <div  className="mb-8" id="el-pguf45hz">
@@ -145,12 +145,4 @@ const layout = () => {
         </div>
 }
 
-export default layout;
-
-
-
-
-
-
-
-
+export default page
