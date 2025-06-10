@@ -53,12 +53,18 @@ const cartSlice = createSlice({
 
     removeFromCart(state, action) {
       const id = action.payload;
+<<<<<<< Updated upstream
       const itemToRemove = state.products.find((item) => item.id === id);
 
       if (itemToRemove) {
         state.totalQuantity -= itemToRemove.quantity;
         state.totalPrice -= itemToRemove.totalPrice;
 
+=======
+      const findItem = state.products.find((item) => item.id === id);
+      if (findItem) {
+        state.totalPrice -= findItem.totalPrice;
+>>>>>>> Stashed changes
         state.products = state.products.filter((item) => item.id !== id);
 
         // prevent negative values
