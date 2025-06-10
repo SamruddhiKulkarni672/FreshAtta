@@ -4,16 +4,15 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-
+import { useDispatch, useSelector } from "react-redux";
 import { ChevronDown, Search, User, ShoppingCart, Menu, X } from "lucide-react";
 
 const Header = () => {
   const router = useRouter();
+  const cart = useSelector((state) => state.cart);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [search, setSearch] = useState("");
-
-  const products = [{}, {}, {}]; // Dummy cart product list
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
@@ -21,7 +20,7 @@ const Header = () => {
     setShowSearch(true);
     router.push("/filter");
   };
-
+  //console.log(cart.products.length,'from header');
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm text-headerTextColor">
       <div className="w-full max-w-screen-2xl mx-auto px-4 py-2 xl:px-24  md:py-5 flex items-center justify-between">
@@ -69,6 +68,10 @@ const Header = () => {
                     fill
                     className="object-contain"
                   />
+                  {/* Count badge in top-left */}
+                  {/* <span className="absolute -top-1 -left-0 right-4 bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">
+                    {cart.products.length}
+                  </span> */}
                 </div>
               </Link>
             </div>

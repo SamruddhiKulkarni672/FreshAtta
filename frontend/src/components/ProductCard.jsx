@@ -7,15 +7,18 @@ import { FaStar, FaRegStar } from "react-icons/fa";
 import Link from "next/link";
 import { FaIndianRupeeSign } from "react-icons/fa6";
 import { FiShoppingCart } from "react-icons/fi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/rtk/cartSlice";
 
 const ProductCard = ({ product }) => {
+  const cart = useSelector((state) => state.cart);
   const [added, setAdded] = useState(false);
   const dispath = useDispatch();
+  const totalPrice = useSelector((state) => state.cart.totalPrice);
   const handleAddToCart = () => {
     setAdded(true);
     dispath(addToCart(product));
+
     //router.push("/cart");
   };
   const router = useRouter();
