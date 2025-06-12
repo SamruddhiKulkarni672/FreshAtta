@@ -107,6 +107,7 @@ const Footer = () => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Your email"
               className="px-3 py-2 rounded-l-md text-sm text-black w-full focus:outline-none"
+              // suppressHydrationWarning
               required
             />
             <button

@@ -35,8 +35,8 @@ const ProductCard = ({ product }) => {
       className="cursor-pointer relative w-full max-w-[300px] xl:w-[280px] h-auto rounded-[20px] sm:rounded-[20px] md:rounded-[20px] p- sm:p-4 bg-productBackground"
     >
       {/* Discount badge */}
-      <div className="absolute top-2 right-1 md:right-2 px-2 py-1 rounded-[15px] bg-disocountBg text-white text-xs sm:text-sm font-semibold shadow">
-        -{product.discountPercent}
+      <div className="absolute top-2 right-1 md:right-2 px-2 py-1 rounded-[10px] bg-disocountBg text-white text-xs sm:text-sm font-semibold shadow">
+        -{product.discountPercent}%
       </div>
 
       <div className="flex flex-col h-full pt-4 sm:pt-0">

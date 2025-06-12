@@ -24,12 +24,12 @@ export default function MissionValues() {
   ];
 
   return (
-    <section className="bg-green-50 py-20 px-6 text-center">
+    <section className=" py-20 px-6 text-center">
       <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-3 max-w-6xl mx-auto">
         {values.map((val, index) => (
           <div
             key={index}
-            className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow"
+            className="bg-green-50 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow cursor-pointer"
           >
             <div className="flex justify-center"> {val.icon}</div>
             <h3 className="text-lg font-semibold text-gray-800 mb-2">
