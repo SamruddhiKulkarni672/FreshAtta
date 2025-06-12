@@ -207,7 +207,7 @@ const CheckoutPage = () => {
                   <Input
                     id="phone"
                     name="phone"
-                    type="tel"
+                    type="number"
                     value={form.phone}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -319,10 +319,10 @@ const CheckoutPage = () => {
                   >
                     <SelectValue placeholder="Select time slot" />
                   </SelectTrigger>
-                  <SelectContent  className="min-w-[var(--radix-select-trigger-width)] bg-white rounded-md shadow-lg border border-gray-200">
+                  <SelectContent className="min-w-[var(--radix-select-trigger-width)] bg-white rounded-md shadow-lg border border-gray-200">
                     {timeSlots.map((slot) => (
                       <SelectItem
-                        className="flex justify-end px-4 py-2 hover:bg-gray-50 text-gray-700 data-[state=checked]:hidden"
+                        className="flex justify-start px-4 py-2 hover:bg-gray-50 text-gray-700 data-[state=checked]:hidden"
                         key={slot}
                         value={slot}
                       >
@@ -347,7 +347,7 @@ const CheckoutPage = () => {
                       onValueChange={(value) =>
                         handleSelectChange("paymentMethod", value)
                       }
-                      className="space-y-4"
+                      className="space-y-4 "
                     >
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="cash" id="cash" />
