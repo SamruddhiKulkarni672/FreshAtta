@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 //import ChangeAddress from "../../components/cart/ChangeAddress";
 import {
   increaseQuantity,
-  removeFromCart, 
+  removeFromCart,
   decreaseQuantity,
 } from "../../rtk/cartSlice";
 export default function CartPage() {
@@ -33,7 +33,7 @@ export default function CartPage() {
   const checkoutHandler = () => {
     router.push("/checkout");
   };
- // console.log(cart.products.length);
+  // console.log(cart.products.length);
   return (
     <div className="max-w-7xl mx-auto  py-6  ">
       <h1 className="text-lg font-bold mb-6">Shopping Cart</h1>
@@ -47,7 +47,7 @@ export default function CartPage() {
               className="flex items-center justify-between gap-4 border-2 border-[#EAE2E2] p-4 rounded-lg shadow- md"
               style={{ boxShadow: "6px 6px 6px 0px #DFD8D8" }}
             >
-              <div className="flex w-[70%] items-center gap-4 cursor-pointer">
+              <div className="flex w-[50%] items-center gap-4 cursor-pointer">
                 <Image
                   src={item.image}
                   alt={item.name}
@@ -61,7 +61,7 @@ export default function CartPage() {
                 </div>
               </div>
 
-              {/* <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 w-[20%]">
                 <button
                   onClick={() => dispatch(decreaseQuantity(item.id))}
                   className="px-2 py-1 border rounded"
@@ -75,10 +75,10 @@ export default function CartPage() {
                 >
                   +
                 </button>
-              </div> */}
+              </div>
 
               <div className="w-[20%]">
-                <p className="font-semibold ml-3" >
+                <p className="font-semibold ml-3">
                   ₹{(item.price * item.quantity).toFixed(2)}
                 </p>
               </div>
@@ -99,7 +99,7 @@ export default function CartPage() {
           <h2 className="text-xl font-semibold">Order Summary</h2>
           <div className="flex justify-between">
             <span>Subtotal</span>
-            <span>₹{total}</span>
+            <span>₹{total.toFixed(2)}</span>
           </div>
           <div className="flex justify-between text-[#7a7777]">
             <span>Shipping</span>
@@ -115,7 +115,7 @@ export default function CartPage() {
           <hr />
           <div className="flex justify-between font-bold text-lg">
             <span>Total</span>
-            <span>₹{total}</span>
+            <span>₹{total.toFixed(2)}</span>
           </div>
           <button
             onClick={() => checkoutHandler()}

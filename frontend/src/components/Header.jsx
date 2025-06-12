@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { ChevronDown, Search, User, ShoppingCart, Menu, X } from "lucide-react";
+import { RiArrowDropDownLine } from "react-icons/ri";
 
 const Header = () => {
   const router = useRouter();
@@ -21,6 +22,7 @@ const Header = () => {
     router.push("/filter");
   };
   //console.log(cart.products.length,'from header');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm text-headerTextColor">
       <div className="w-full max-w-screen-2xl mx-auto px-4 py-2 xl:px-24  md:py-5 flex items-center justify-between">
@@ -42,17 +44,17 @@ const Header = () => {
             <Link href="/" className="hover:text-green-700 transition">
               Home
             </Link>
+            <Link href="/shop" className="hover:text-green-700 transition">
+              Shop
+            </Link>
             <Link href="/about" className="hover:text-green-700 transition">
               About
             </Link>
-            <Link href="/market" className="hover:text-green-700 transition">
-              Market
-            </Link>
-            <Link href="/services" className="hover:text-green-700 transition">
-              Services
-            </Link>
             <Link href="/blog" className="hover:text-green-700 transition">
               Blog
+            </Link>
+            <Link href="/contact" className="hover:text-green-700 transition">
+              Contact
             </Link>
           </nav>
 
@@ -77,14 +79,46 @@ const Header = () => {
             </div>
 
             {/* Sign In */}
-            <Link href="/login">
+            <div className="relative">
               <Button
                 variant="destructive"
-                className="px-2 py-1 text-white rounded-lg"
+                className="px-2 text-[14px] py-1 text-white rounded-lg flex items-center gap-1"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               >
                 Sign In
+                <RiArrowDropDownLine className="w-6 h-6" />
               </Button>
-            </Link>
+
+              {/* Simple Dropdown */}
+              {isDropdownOpen && (
+                <div className="absolute right-0 mt-1 w-40 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50">
+                  <Link
+                    href="/register"
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 rounded-t-md"
+                  >
+                    Create Account
+                  </Link>
+                  <Link
+                    href="/login"
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 rounded-b-md"
+                  >
+                    Sign In
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            {/* <Link href="/login">
+              <Button
+                variant="destructive"
+                className="px-2 text-[14px] py-1 text-white rounded-lg"
+              >
+                Sign In
+                <RiArrowDropDownLine className="text-[20px]" />
+              </Button>
+            </Link> */}
           </div>
         </div>
 
@@ -113,6 +147,13 @@ const Header = () => {
             Home
           </Link>
           <Link
+            href="/shop"
+            className="block py-1  hover:text-green-700 transition"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Shop
+          </Link>
+          <Link
             href="/about"
             className="block py-1  hover:text-green-700 transition"
             onClick={() => setIsMenuOpen(false)}
@@ -120,25 +161,18 @@ const Header = () => {
             About
           </Link>
           <Link
-            href="/market"
-            className="block py-1  hover:text-green-700 transition"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Market
-          </Link>
-          <Link
-            href="/services"
-            className="block py-1  hover:text-green-700 transition"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Services
-          </Link>
-          <Link
             href="/blog"
             className="block py-1  hover:text-green-700 transition"
             onClick={() => setIsMenuOpen(false)}
           >
             Blog
+          </Link>
+          <Link
+            href="/contact"
+            className="block py-1  hover:text-green-700 transition"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Contact
           </Link>
 
           <Link

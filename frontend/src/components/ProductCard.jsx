@@ -35,7 +35,7 @@ const ProductCard = ({ product }) => {
       className="cursor-pointer relative w-full max-w-[300px] xl:w-[280px] h-auto rounded-[20px] sm:rounded-[20px] md:rounded-[20px] p- sm:p-4 bg-productBackground"
     >
       {/* Discount badge */}
-      <div className="absolute top-2 right-1 md:right-2 px-2 py-1 rounded bg-disocountBg text-white text-xs sm:text-sm font-semibold shadow">
+      <div className="absolute top-2 right-1 md:right-2 px-2 py-1 rounded-[15px] bg-disocountBg text-white text-xs sm:text-sm font-semibold shadow">
         -{product.discountPercent}
       </div>
 
@@ -66,13 +66,21 @@ const ProductCard = ({ product }) => {
               )
             )}
           </div>
-          <div>
-            <p className="text-sm text-gray-600 mt-2">
+          <div className="relative group w-fit">
+            <p className="text-sm text-gray-600 mt-2 cursor-default">
               {product.description.length > 40
                 ? product.description.slice(0, 30) + "..."
                 : product.description}
             </p>
+
+            {/* Tooltip */}
+            {product.description.length > 40 && (
+              <div className="absolute z-10 hidden group-hover:block w-72 p-2 text-sm bg-productBackground  rounded-md shadow-md top-full left-0 mt-2">
+                {product.description}
+              </div>
+            )}
           </div>
+
           <div className="flex mt-2 items-center justify-between">
             <div className="text-sm sm:text-base flex line-through leading-[1.2] text-productTextOriginal items-center gap-1">
               <FaIndianRupeeSign />
