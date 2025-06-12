@@ -6,7 +6,12 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { ChevronDown, Search, User, ShoppingCart, Menu, X } from "lucide-react";
-import { RiArrowDropDownLine } from "react-icons/ri";
+import {
+  RiArrowDropDownLine,
+  RiPerson,
+  RiPresentationFill,
+  RiProfileLine,
+} from "react-icons/ri";
 
 const Header = () => {
   const router = useRouter();

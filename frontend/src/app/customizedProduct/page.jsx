@@ -78,7 +78,7 @@ const page = () => {
                                             type="checkbox"
                                             checked={isSelected}
                                             onChange={() => toggleGrain(key)}
-                                            className="w-5 h-5 accent-[#896040]"
+                                            className="w-5 h-5 accent-[#896040] items-center"
                                         />
                                         <div className="text-base sm:text-lg text-[#4E4B4B] font-semibold">
                                             {grain}

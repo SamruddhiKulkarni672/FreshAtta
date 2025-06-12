@@ -15,7 +15,7 @@ import {
 const Footer = () => {
   const [email, setEmail] = useState("");
   return (
-    <footer className="bg-[#0F172A] text-white py-10 px-6 md:px-16 w-full">
+    <footer className="bg-[#0F172A] text-white py-10 px-6 mt-28 md:px-16 w-full ">
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
         {/* Logo & About */}
         <div>
