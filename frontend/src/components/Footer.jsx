@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   FaFacebookF,
   FaTwitter,
@@ -13,6 +13,7 @@ import {
 } from "react-icons/fa";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
   return (
     <footer className="bg-[#0F172A] text-white py-10 px-6 md:px-16 w-full">
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
@@ -30,10 +31,11 @@ const Footer = () => {
             <a href="#" className="hover:text-white">
               <FaFacebookF />
             </a>
-            <a href="#" className="hover:text-white">
-              <FaTwitter />
-            </a>
-            <a href="#" className="hover:text-white">
+
+            <a
+              href="https://www.instagram.com/kisan_basket?igsh=MThtcTh0eWx4Mmo3ZA=="
+              className="hover:text-white"
+            >
               <FaInstagram />
             </a>
             <a href="#" className="hover:text-white">
@@ -47,22 +49,22 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
           <ul className="space-y-2 text-sm text-gray-300">
             <li>
-              <a href="#" className="hover:text-white">
+              <a href="/about" className="hover:text-white">
                 About Us
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-white">
+              <a href="/shop" className="hover:text-white">
                 Shop
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-white">
+              <a href="/blog" className="hover:text-white">
                 Blog
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-white">
+              <a href="/contact" className="hover:text-white">
                 Contact
               </a>
             </li>
@@ -75,11 +77,15 @@ const Footer = () => {
           <ul className="space-y-3 text-sm text-gray-300">
             <li className="flex items-start space-x-2">
               <FaMapMarkerAlt className="mt-1" />
-              <span>123 Farmer's Market, City, State 12345</span>
+              <span>
+                Office No. 302, 3rd Floor, <br /> 74 Downtown, Baner Road,
+                <br />
+                Baner, Pune-411045
+              </span>
             </li>
             <li className="flex items-start space-x-2">
               <FaPhoneAlt className="mt-1" />
-              <span>+1 234 567 8900</span>
+              <span>+919730752125</span>
             </li>
             <li className="flex items-start space-x-2">
               <FaEnvelope className="mt-1" />
@@ -97,8 +103,11 @@ const Footer = () => {
           <form className="flex">
             <input
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Your email"
               className="px-3 py-2 rounded-l-md text-sm text-black w-full focus:outline-none"
+              required
             />
             <button
               type="submit"
