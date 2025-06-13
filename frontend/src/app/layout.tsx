@@ -1,10 +1,10 @@
-// app/layout.tsx or app/layout.js
+
 import "./globals.css";
 import { Inter, Poppins } from "next/font/google";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import Providers from "./providers";  
-import { Toaster } from 'sonner';
+import Header from "@/components/common/Header";
+import Footer from "@/components/common/Footer";
+import Providers from "@/components/common/providers";
+import { Toaster } from "sonner";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const poppins = Poppins({
   subsets: ["latin"],

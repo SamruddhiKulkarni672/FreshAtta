@@ -24,8 +24,8 @@ export default function MissionValues() {
   ];
 
   return (
-    <section className=" py-20 px-6 text-center">
-      <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-3 max-w-6xl mx-auto">
+    <section className=" lg:py-20 md:py-8 py-4 px-6 text-center">
+      <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-3 max-w-7xl mx-auto">
         {values.map((val, index) => (
           <div
             key={index}

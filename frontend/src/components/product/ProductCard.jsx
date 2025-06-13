@@ -30,10 +30,7 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <div
-      onClick={handleNavigate}
-      className="cursor-pointer relative w-full max-w-[300px] xl:w-[280px] h-auto rounded-[20px] sm:rounded-[20px] md:rounded-[20px] p- sm:p-4 bg-productBackground"
-    >
+    <div className="cursor-pointer relative w-full max-w-[300px] xl:w-[280px] h-auto rounded-[20px] sm:rounded-[20px] md:rounded-[20px] p-4 sm:p-4 bg-productBackground">
       {/* Discount badge */}
       <div className="absolute top-2 right-1 md:right-2 px-2 py-1 rounded-[10px] bg-disocountBg text-white text-xs sm:text-sm font-semibold shadow">
         -{product.discountPercent}%
@@ -41,7 +38,10 @@ const ProductCard = ({ product }) => {
 
       <div className="flex flex-col h-full pt-4 sm:pt-0">
         {/* Image */}
-        <div className="h-[140px] sm:h-[160px] md:h-[180px] rounded-[12px] sm:rounded-[15px] flex items-center justify-center">
+        <div
+          onClick={handleNavigate}
+          className="h-[140px] sm:h-[160px] md:h-[180px] rounded-[12px] sm:rounded-[15px] flex items-center justify-center"
+        >
           <Image
             src={product.image}
             alt={product.name}
@@ -97,7 +97,10 @@ const ProductCard = ({ product }) => {
               {product.discountedPrice}
             </div>
             {product.isCustomizedProduct && (
-              <div className="w-[85px]   h-[45px] sm:h-[45px] rounded-[10px]  sm:rounded-[13px] ml-2 bg-cartBackgroundColor flex items-center justify-center">
+              <div
+                onClick={handleNavigate}
+                className="w-[85px]   h-[45px] sm:h-[45px] rounded-[10px]  sm:rounded-[13px] ml-2 bg-cartBackgroundColor flex items-center justify-center"
+              >
                 {/* <FiShoppingCart className="text-white text-lg sm:text-xl" /> */}
                 <span className=" text-white text-sm font-semibold px-2">
                   checkout
