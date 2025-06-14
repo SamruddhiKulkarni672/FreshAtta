@@ -10,31 +10,26 @@ const Sidebar = () => {
     const router = useRouter();
     const pathname = usePathname();
 
-    // Helper function to navigate only if needed
-    const handleNavigation = (path: string) => {
+     const handleNavigation = (path: string) => {
         if (pathname !== path) {
             router.push(path);
         }
     };
 
     const navItems = [
+        // {
+        //     label: "Dashboard",
+        //     icon: <LayoutDashboard className="mr-2 h-4 w-4" />,
+        //     path: "/admin",
+        // },
+        
+        // {
+        //     label: "Manage Orders",
+        //     icon: <List className="mr-2 h-4 w-4" />,
+        //     path: "/admin/orders",
+        // },
         {
-            label: "Dashboard",
-            icon: <LayoutDashboard className="mr-2 h-4 w-4" />,
-            path: "/admin",
-        },
-        {
-            label: "Manage Products",
-            icon: <Package className="mr-2 h-4 w-4" />,
-            path: "/admin/products",
-        },
-        {
-            label: "Manage Orders",
-            icon: <List className="mr-2 h-4 w-4" />,
-            path: "/admin/orders",
-        },
-        {
-            label: "add grain",
+            label: "Grain",
             icon: (
                 <Image
                     src="/images/grain.svg"
@@ -48,7 +43,7 @@ const Sidebar = () => {
         },
 
         {
-            label: "add grain-combo",
+            label: "Grain-combo",
             icon: (
                 <Image
                     src="/images/grain.svg"
@@ -59,6 +54,11 @@ const Sidebar = () => {
                 />
             ),
             path: "/admin/grainCombo",
+        },
+         {
+            label: "Products",
+            icon: <Package className="mr-2 h-4 w-4" />,
+            path: "/admin/product",
         },
     ];
 

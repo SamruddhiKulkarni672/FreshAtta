@@ -1,16 +1,21 @@
-// components/ProductTable.jsx
 "use client";
 
 import React from "react";
-import { Pencil, Trash2 } from "lucide-react";
+import { Pencil, Trash2, PlusCircle } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-
-const ProductTable = ({ headers = [], products = [], onEdit, onDelete, showNutrients = true }) => {
+const ProductTable = ({
+    headers = [],
+    products = [],
+    onEdit,
+    onDelete,
+    onCustomVar,
+    showNutrients = true,
+    custom = false,
+}) => {
     return (
         <div className="overflow-x-auto rounded-lg shadow">
             <table className="min-w-full text-sm text-left text-gray-700">
-                <thead className="bg-[#ddd7c5] text-gray-800">
+                <thead className="bg-[#eeedeb] text-gray-800">
                     <tr>
                         {headers.map((header, idx) => (
                             <th key={idx} className="px-4 py-3 font-semibold">
@@ -48,25 +53,34 @@ const ProductTable = ({ headers = [], products = [], onEdit, onDelete, showNutri
                                     </td>
                                 </>
                             )}
-                            {/* <td className="px-4 py-3 space-x-2">
-                                {onEdit && (
-                                    <Button variant="outline" onClick={() => onEdit(product.id)}>
-                                        Edit
-                                    </Button>
-                                )}
-                                <Button variant="destructive" onClick={() => onDelete(product.id)}>
-                                    Delete
-                                </Button>
-                            </td> */}
-                            <td className="px-4 py-3 space-x-2"> 
-                            <div className="flex gap-2">
-                                <button onClick={() => onEdit?.(product.id)}>
-                                    <Pencil size={16} />
-                                </button>
-                                <button onClick={() => onDelete?.(product.id)}>
-                                    <Trash2 size={16} />
-                                </button>
-                            </div>
+                            {custom && (
+                                <td className="px-4 py-3">
+                                    <button
+                                        onClick={() =>
+                                            product.customMix && onCustomVar?.(product.id)
+                                        }
+                                        className={`flex items-center gap-1 ${
+                                            product.customMix
+                                                ? "text-blue-600"
+                                                : "text-gray-400 cursor-not-allowed"
+                                        }`}
+                                        disabled={!product.customMix}
+                                    >
+                                        <PlusCircle size={16} />
+                                        Custom Variant
+                                    </button>
+                                </td>
+                            )}
+
+                            <td className="px-4 py-3 space-x-2">
+                                <div className="flex gap-2">
+                                    <button onClick={() => onEdit?.(product.id)}>
+                                        <Pencil size={16} />
+                                    </button>
+                                    <button onClick={() => onDelete?.(product.id)}>
+                                        <Trash2 size={16} />
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     ))}

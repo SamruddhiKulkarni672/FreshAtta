@@ -25,3 +25,19 @@ export async function DELETE(request) {
 
   return new Response(null, { status: res.status });
 }
+
+
+export async function PUT(request) {
+  const pathname = new URL(request.url).pathname;
+  const id = pathname.split("/").pop();  
+  const body = await request.json();
+
+  const res = await fetch(`http://192.168.1.39:8080/admin/product/grain-combo `, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+
+  const data = await res.json();
+  return Response.json(data);
+}

@@ -41,7 +41,7 @@ const AdminLayout = ({ children }) => {
       </div>
 
       {/* Main Content */}
-      <main className="w-full p-4 md:p-6">{children}</main>
+      <main className="w-full p-4 md:p-6 bg-[#ffffff]">{children}</main>
     </div>
   );
 };
