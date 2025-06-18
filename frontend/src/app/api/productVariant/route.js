@@ -2,7 +2,7 @@ export async function POST(req) {
   try {
     const body = await req.json();
 
-    const res = await fetch("http://192.168.1.39:8080/admin/product-manage/product-variant", {
+    const res = await fetch("http://localhost:8080/admin/product-manage/product-variant", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -28,11 +28,11 @@ export async function GET(req) {
     const { searchParams } = new URL(req.url);
     const productId = searchParams.get("productId");
 
-    if (!productId) {
-      return new Response("Missing productId", { status: 400 });
-    }
+    const url = productId
+      ? `http://localhost:8080/admin/product-manage/product-variant/${productId}`
+      : `http://localhost:8080/admin/product-manage/product-variant`;
 
-    const res = await fetch(`http://192.168.1.39:8080/admin/product-manage/product-variant?productId=${productId}`);
+    const res = await fetch(url);
 
     if (!res.ok) {
       const errorText = await res.text();
@@ -50,11 +50,13 @@ export async function GET(req) {
 
 
 
+
+
 export async function DELETE(request) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
 
-  const res = await fetch(`http://192.168.1.39:8080/admin/product-manage/product-variant/${id}`, {
+  const res = await fetch(`http://localhost:8080/admin/product-manage/product-variant/${id}`, {
     method: "DELETE",
   });
 
@@ -67,7 +69,7 @@ export async function PUT(req) {
   try {
     const body = await req.json();
 
-    const res = await fetch("http://192.168.1.39:8080/admin/product-manage/product-variant", {
+    const res = await fetch("http://localhost:8080/admin/product-manage/product-variant", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

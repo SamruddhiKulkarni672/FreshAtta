@@ -7,14 +7,13 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import ProductTable from "@/components/ProductTable";
 import CustomVariant from "@/components/CustomVarient";
-import { skipToken } from "@reduxjs/toolkit/query/react";
 
 import {
   useAddProductVariantMutation,
   useUpdateProductVariantMutation,
   useDeleteProductVariantMutation,
   useGetGrainCombosQuery,
-  useGetProductVariantsQuery,
+  useGetoneProductQuery,
 } from "@/rtk/grainApi";
 
 const ProductVariantForm = ({ productId, onCancel }) => {
@@ -31,23 +30,25 @@ const ProductVariantForm = ({ productId, onCancel }) => {
   const [variant, setVariant] = useState([]);
   const [error, setError] = useState("");
   const [customVariantProductId, setCustomVariantProductId] = useState(null);
+  const [fieldErrors, setFieldErrors] = useState({});
 
   const [addVariant] = useAddProductVariantMutation();
   const [updateVariant] = useUpdateProductVariantMutation();
   const [deleteVariant] = useDeleteProductVariantMutation();
 
   const { data: combos = [], isLoading: loadingCombos } = useGetGrainCombosQuery();
-  const { data: productVariant = [], error: variantFetchError } = useGetProductVariantsQuery(
-    productId ?? skipToken
-  );
+  const { data: oneproduct, isLoading: loadingOneProduct, error: oneProdError } =
+    useGetoneProductQuery(productId);
 
   useEffect(() => {
-    if (!productVariant) return;
+    if (!oneproduct || !Array.isArray(oneproduct.productVariantEntityList)) return;
+
+    const fetchedVariants = oneproduct.productVariantEntityList;
 
     const isSame =
-      variant.length === productVariant.length &&
+      variant.length === fetchedVariants.length &&
       variant.every((v, i) => {
-        const p = productVariant[i];
+        const p = fetchedVariants[i];
         return (
           v.id === p?.id &&
           v.name === p?.name &&
@@ -59,19 +60,30 @@ const ProductVariantForm = ({ productId, onCancel }) => {
       });
 
     if (!isSame) {
-      setVariant(productVariant);
+      setVariant(fetchedVariants);
     }
-  }, [productVariant]);
+  }, [oneproduct]);
 
-  const headers = ["Variant Name", "Description", "Status", "Add Custom"];
+  const headers = ["Variant Name", "Description", "Weight", "Add Custom"];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    const errors = {};
+
+    if (!form.name.trim()) errors.name = "Name is required";
+    if (!form.description.trim()) errors.description = "Description is required";
+    if (!form.weight || isNaN(form.weight) || parseFloat(form.weight) <= 0)
+      errors.weight = "Valid weight is required";
+    if (!form.grainComboId) errors.grainComboId = "Please select a grain combo";
+
+    setFieldErrors(errors);
+
+    if (Object.keys(errors).length > 0) return;
 
     const payload = {
-      name: form.name,
-      description: form.description,
+      name: form.name.trim(),
+      description: form.description.trim(),
       weight: parseFloat(form.weight),
       grainComboId: parseInt(form.grainComboId),
       customMix: Boolean(form.customMix),
@@ -104,6 +116,7 @@ const ProductVariantForm = ({ productId, onCancel }) => {
     });
     setEditingId(null);
     setShowForm(false);
+    setFieldErrors({});
   };
 
   const handleEdit = (id) => {
@@ -148,7 +161,13 @@ const ProductVariantForm = ({ productId, onCancel }) => {
 
   return (
     <div className="w-full flex justify-center">
-      <div className="w-full max-w-3xl bg-white border border-gray-200  rounded-lg p-6 my-6">
+      <div className="w-full max-w-3xl bg-white border border-gray-200 rounded-lg p-6 my-6">
+        {oneProdError && (
+          <div className="bg-red-100 text-red-800 px-4 py-2 my-2 rounded-md">
+            Failed to fetch product. Please check your connection or try again.
+          </div>
+        )}
+
         {customVariantProductId ? (
           <CustomVariant
             productVariantId={customVariantProductId}
@@ -167,14 +186,21 @@ const ProductVariantForm = ({ productId, onCancel }) => {
 
             <div className="flex justify-end p-2 py-4">
               <Button className="bg-[#dbd8d3]" onClick={toggleForm}>
-                {showForm ? (editingId ? "Cancel Edit" : "Cancel") : "Add Product Variant"}
+                {showForm
+                  ? editingId
+                    ? "Cancel Edit"
+                    : "Cancel"
+                  : "Add Product Variant"}
               </Button>
             </div>
 
             {showForm ? (
               <form onSubmit={handleSubmit} className="space-y-4">
-                {error && <p className="text-red-600">{error}</p>}
-
+                {error && (
+                  <div className="bg-red-100 text-red-800 px-4 py-2 rounded-md">
+                    {error}
+                  </div>
+                )}
                 <div>
                   <label className="block mb-1 text-sm">Name</label>
                   <Input
@@ -182,15 +208,23 @@ const ProductVariantForm = ({ productId, onCancel }) => {
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     placeholder="Variant Name"
                   />
+                  {fieldErrors.name && (
+                    <p className="text-red-600 text-sm mt-1">{fieldErrors.name}</p>
+                  )}
                 </div>
 
                 <div>
                   <label className="block mb-1 text-sm">Description</label>
                   <Textarea
                     value={form.description}
-                    onChange={(e) => setForm({ ...form, description: e.target.value })}
+                    onChange={(e) =>
+                      setForm({ ...form, description: e.target.value })
+                    }
                     placeholder="Variant Description"
                   />
+                  {fieldErrors.description && (
+                    <p className="text-red-600 text-sm mt-1">{fieldErrors.description}</p>
+                  )}
                 </div>
 
                 <div>
@@ -198,8 +232,13 @@ const ProductVariantForm = ({ productId, onCancel }) => {
                   <Input
                     type="number"
                     value={form.weight}
-                    onChange={(e) => setForm({ ...form, weight: e.target.value })}
+                    onChange={(e) =>
+                      setForm({ ...form, weight: e.target.value })
+                    }
                   />
+                  {fieldErrors.weight && (
+                    <p className="text-red-600 text-sm mt-1">{fieldErrors.weight}</p>
+                  )}
                 </div>
 
                 <div>
@@ -207,7 +246,9 @@ const ProductVariantForm = ({ productId, onCancel }) => {
                   <select
                     className="w-full border rounded px-3 py-2"
                     value={form.grainComboId}
-                    onChange={(e) => setForm({ ...form, grainComboId: e.target.value })}
+                    onChange={(e) =>
+                      setForm({ ...form, grainComboId: e.target.value })
+                    }
                   >
                     <option value="">Select a Grain Combo</option>
                     {loadingCombos ? (
@@ -220,12 +261,19 @@ const ProductVariantForm = ({ productId, onCancel }) => {
                       ))
                     )}
                   </select>
+                  {fieldErrors.grainComboId && (
+                    <p className="text-red-600 text-sm mt-1">
+                      {fieldErrors.grainComboId}
+                    </p>
+                  )}
                 </div>
 
                 <div className="flex items-center gap-2">
                   <Checkbox
                     checked={form.customMix}
-                    onCheckedChange={(val) => setForm({ ...form, customMix: Boolean(val) })}
+                    onCheckedChange={(val) =>
+                      setForm({ ...form, customMix: Boolean(val) })
+                    }
                   />
                   <label className="text-sm">Custom Mix</label>
                 </div>
@@ -238,13 +286,15 @@ const ProductVariantForm = ({ productId, onCancel }) => {
               <div>
                 <ProductTable
                   headers={headers}
-                  products={variant.map((v) => ({
-                    id: v.id,
-                    name: v.name,
-                    description: v.description,
-                    price: v.customMix ? "Custom" : "Not Custom",
-                    customMix: v.customMix,
-                  }))}
+                  products={Array.isArray(variant)
+                    ? variant.map((v) => ({
+                        id: v.id,
+                        name: v.name,
+                        description: v.description,
+                        price: `${v.weight}gm`,
+                        customMix: v.customMix,
+                      }))
+                    : []}
                   showNutrients={false}
                   custom={true}
                   onDelete={handleDelete}

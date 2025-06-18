@@ -1,9 +1,16 @@
-export async function GET() {
+export async function GET(req) {
   try {
-    const res = await fetch("http://192.168.1.39:8080/admin/product-manage/product");
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+
+    const url = id
+      ? `http://localhost:8080/admin/product-manage/product/${id}`
+      : `http://localhost:8080/admin/product-manage/product`;
+
+    const res = await fetch(url);
     if (!res.ok) {
-      console.error("GET /product failed:", res.status);
-      return new Response("Failed to fetch products", { status: 500 });
+      console.error(`GET /product${id ? `/${id}` : ""} failed:`, res.status);
+      return new Response("Failed to fetch product(s)", { status: 500 });
     }
 
     const data = await res.json();
@@ -14,13 +21,14 @@ export async function GET() {
   }
 }
 
+
 export async function POST(req) {
   const pathname = new URL(req.url).pathname;
 
   //   Handle grain combo
   if (pathname.includes("/grain/combo")) {
     const body = await req.json();
-    const res = await fetch("http://192.168.1.39:8080/admin/product/grain-combo", {
+    const res = await fetch("http://localhost:8080/admin/product/grain-combo", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -32,7 +40,7 @@ export async function POST(req) {
   //   Handle product variant
   if (pathname.includes("/product-variant")) {
     const body = await req.json();
-    const res = await fetch("http://192.168.1.39:8080/admin/product-manage/product-variant", {
+    const res = await fetch("http://localhost:8080/admin/product-manage/product-variant", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -50,7 +58,7 @@ export async function POST(req) {
       newFormData.append(key, value);
     }
 
-    const res = await fetch("http://192.168.1.39:8080/admin/product-manage/product", {
+    const res = await fetch("http://localhost:8080/admin/product-manage/product", {
       method: "POST",
       body: newFormData,
     });
@@ -81,7 +89,7 @@ export async function DELETE(request) {
     const id = searchParams.get("id");
 
     const res = await fetch(
-      `http://192.168.1.39:8080/admin/product-manage/product/${id}`,
+      `http://localhost:8080/admin/product-manage/product/${id}`,
       {
         method: "DELETE",
       }
@@ -114,7 +122,7 @@ export async function PUT(req) {
       backendFormData.append("images", file);
     });
 
-    const res = await fetch("http://192.168.1.39:8080/admin/product-manage/product", {
+    const res = await fetch("http://localhost:8080/admin/product-manage/product", {
       method: "PUT",
       body: backendFormData,
     });

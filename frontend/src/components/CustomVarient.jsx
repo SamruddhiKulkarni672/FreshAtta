@@ -2,37 +2,51 @@
 
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import ProductTable from "@/components/ProductTable";
 import {
   useGetGrainCombosQuery,
-  useGetCustomVariantsQuery,
   useAddCustomVariantMutation,
   useUpdateCustomVariantMutation,
   useDeleteCustomVariantMutation,
+  useGetOneProductVariantQuery
 } from "@/rtk/grainApi";
 
 const CustomVariant = ({ productVariantId, onBack }) => {
   const [form, setForm] = useState({ grainComboId: "" });
   const [editingId, setEditingId] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+  const [error, setError] = useState("");
+  const [fieldErrors, setFieldErrors] = useState({});
   const [customVariants, setCustomVariants] = useState([]);
-    const [showForm, setShowForm] = useState(false);
-  
 
   const { data: combos = [] } = useGetGrainCombosQuery();
-  const { data: fetchedVariants = [] } = useGetCustomVariantsQuery(productVariantId);
+  const { data: oneproductVariants } = useGetOneProductVariantQuery(productVariantId);
   const [addCustomVariant] = useAddCustomVariantMutation();
   const [updateCustomVariant] = useUpdateCustomVariantMutation();
   const [deleteCustomVariant] = useDeleteCustomVariantMutation();
 
+  // Sync fetched data to local state
   useEffect(() => {
-    if (Array.isArray(fetchedVariants)) {
-      setCustomVariants(fetchedVariants);
+    if (oneproductVariants?.customVariantEntityList) {
+      setCustomVariants(oneproductVariants.customVariantEntityList);
     }
-  }, [fetchedVariants]);
+  }, [oneproductVariants]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+    setFieldErrors({});
+
+    const errors = {};
+    if (!form.grainComboId || isNaN(parseInt(form.grainComboId))) {
+      errors.grainComboId = "Please select a valid Grain Combo";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      return;
+    }
+
     const payload = {
       grainComboId: parseInt(form.grainComboId),
       productVariantId,
@@ -48,26 +62,22 @@ const CustomVariant = ({ productVariantId, onBack }) => {
         const added = await addCustomVariant(payload).unwrap();
         setCustomVariants((prev) => [...prev, added]);
       }
-      setShowForm(false)
-      setForm({ grainComboId: "" });
-      setEditingId(null);
+      resetForm();
     } catch (error) {
       console.error("Error submitting custom variant", error);
+      setError("Submission failed. Please try again.");
     }
   };
-
-
-  
-
-
 
   const handleEdit = (id) => {
     const target = customVariants.find((v) => v.id === id);
     if (!target) return;
-    setShowForm(true)
 
+    setShowForm(true);
     setForm({ grainComboId: target.grainComboId.toString() });
     setEditingId(id);
+    setError("");
+    setFieldErrors({});
   };
 
   const handleDelete = async (id) => {
@@ -77,11 +87,20 @@ const CustomVariant = ({ productVariantId, onBack }) => {
       setCustomVariants((prev) => prev.filter((v) => v.id !== id));
     } catch (err) {
       console.error("Delete failed", err);
+      setError("Delete failed. Please try again.");
     }
   };
 
+  const resetForm = () => {
+    setForm({ grainComboId: "" });
+    setEditingId(null);
+    setShowForm(false);
+    setError("");
+    setFieldErrors({});
+  };
+
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white  ">
+    <div className="max-w-2xl mx-auto p-6 bg-white">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-semibold">
           {editingId ? "Edit" : "Add"} Custom Variant
@@ -91,57 +110,67 @@ const CustomVariant = ({ productVariantId, onBack }) => {
         </Button>
       </div>
 
-       <div className="flex justify-end py-5">
-                      <Button
-                          className="bg-[#dbd8d3]"
-                          onClick={() => {
-                            //   if (editingId) resetForm();
-                             setShowForm(!showForm);
-                          }}
-                      >
-                          {showForm ? "Cancel" : "Add new Grain"}
-                      </Button>
-                  </div>
-
-
-
-      {showForm?(<form onSubmit={handleSubmit} className="mb-6 space-y-4">
-        <div>
-          <label className="block mb-1 text-sm">Grain Combo</label>
-          <select
-            className="w-full border rounded px-3 py-2"
-            value={form.grainComboId}
-            onChange={(e) => setForm({ grainComboId: e.target.value })}
-          >
-            <option value="">Select Combo</option>
-            {combos.map((combo) => (
-              <option key={combo.id} value={combo.id}>
-                {combo.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <Button type="submit" className="bg-[#dbd8d3]">
-          {editingId ? "Update" : "Add"} Custom Variant
+      <div className="flex justify-end py-5">
+        <Button
+          className="bg-[#dbd8d3]"
+          onClick={() => {
+            if (showForm) resetForm();
+            else setShowForm(true);
+          }}
+        >
+          {showForm ? "Cancel" : "Add Custom Variant"}
         </Button>
-      </form>):(
+      </div>
+
+      {showForm ? (
+        <form onSubmit={handleSubmit} className="mb-6 space-y-4">
+          {error && (
+            <div className="bg-red-100 text-red-800 px-4 py-2 rounded-md">
+              {error}
+            </div>
+          )}
+          <div>
+            <label className="block mb-1 text-sm">Grain Combo</label>
+            <select
+              className="w-full border rounded px-3 py-2"
+              value={form.grainComboId}
+              onChange={(e) => {
+                setForm({ grainComboId: e.target.value });
+                setFieldErrors({ ...fieldErrors, grainComboId: "" });
+              }}
+            >
+              <option value="">Select Combo</option>
+              {combos.map((combo) => (
+                <option key={combo.id} value={combo.id}>
+                  {combo.name}
+                </option>
+              ))}
+            </select>
+            {fieldErrors.grainComboId && (
+              <p className="text-red-600 text-sm mt-1">
+                {fieldErrors.grainComboId}
+              </p>
+            )}
+          </div>
+
+          <Button type="submit" className="bg-[#dbd8d3]">
+            {editingId ? "Update" : "Add"} Custom Variant
+          </Button>
+        </form>
+      ) : (
         <ProductTable
-        headers={["Grain Combo", "",""]}
-        products={customVariants.map((c) => ({
-          id: c.id,
-          name: combos.find((combo) => combo.id === c.grainComboId)?.name || "Unknown",
-        }))}
-        custom={false}
-        showNutrients={false}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
-      />
+          headers={["Grain Combo", "", ""]}
+          products={customVariants.map((c) => ({
+            id: c.id,
+            name:
+              combos.find((combo) => combo.id === c.grainComboId)?.name || "Unknown",
+          }))}
+          custom={false}
+          showNutrients={false}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+        />
       )}
-       
-
-       
-
-
     </div>
   );
 };

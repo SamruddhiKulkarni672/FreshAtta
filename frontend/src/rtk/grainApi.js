@@ -10,6 +10,10 @@ export const grainApi = createApi({
             query: () => "/grain",
         }),
 
+        getnutrients: builder.query({
+            query: () => "/grain/nutrients",
+        }),
+
         addGrain: builder.mutation({
             query: (grain) => ({
                 url: "/grain",
@@ -63,6 +67,10 @@ export const grainApi = createApi({
 
         // Product API
         getProducts: builder.query({
+            query: () => `/product `,
+        }),
+
+        getoneProduct: builder.query({
             query: (id) => `/product?id=${id}`,
         }),
 
@@ -92,6 +100,10 @@ export const grainApi = createApi({
         //product variant
 
         getProductVariants: builder.query({
+            query: () => `/productVariant`,
+        }),
+
+        getOneProductVariant: builder.query({
             query: (productId) => `/productVariant?productId=${productId}`,
         }),
 
@@ -122,10 +134,8 @@ export const grainApi = createApi({
             }),
         }),
 
-
-
-
         //custom variant
+        
 
         getCustomVariants: builder.query({
             query: (productId) => `/CustomVariant?productId=${productId}`,
@@ -157,12 +167,6 @@ export const grainApi = createApi({
                 method: "DELETE",
             }),
         }),
-
-
-
-
-
-
     }),
 });
 
@@ -172,6 +176,7 @@ export const {
     useAddGrainMutation,
     useDeleteGrainMutation,
     useUpdateGrainMutation,
+    useGetnutrientsQuery,
 
     // Grain Combos
     useGetGrainCombosQuery,
@@ -184,12 +189,14 @@ export const {
     useAddProductMutation,
     useDeleteProductMutation,
     useUpdateProductMutation,
+    useGetoneProductQuery,
 
     //product variant
     useGetProductVariantsQuery,
     useAddProductVariantMutation,
     useUpdateProductVariantMutation,
     useDeleteProductVariantMutation,
+    useGetOneProductVariantQuery,
 
     //customVarient
     useGetCustomVariantsQuery,

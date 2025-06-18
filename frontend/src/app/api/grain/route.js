@@ -2,23 +2,24 @@
 export async function GET(request) {
   const pathname = new URL(request.url).pathname;
 
-  if (pathname.includes("/grain/combo")) {
-    const res = await fetch("http://192.168.1.39:8080/admin/product/grain-combo");
+  if (pathname.includes("/grain/nutrients")) {
+    const res = await fetch("http://localhost:8080/admin/product/grain/nutrients");
     const data = await res.json();
     return Response.json(data);
   }
 
-  const res = await fetch("http://192.168.1.39:8080/admin/product/grain");
+  const res = await fetch("http://localhost:8080/admin/product/grain");
   const data = await res.json();
   return Response.json(data);
 }
+
 
 export async function POST(request) {
   const pathname = new URL(request.url).pathname;
   const body = await request.json();
 
   if (pathname.includes("/grain/combo")) {
-    const res = await fetch("http://192.168.1.39:8080/admin/product/grain-combo", {
+    const res = await fetch("http://localhost:8080/admin/product/grain-combo", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -27,7 +28,7 @@ export async function POST(request) {
     return Response.json(data);
   }
 
-  const res = await fetch("http://192.168.1.39:8080/admin/product/grain", {
+  const res = await fetch("http://localhost:8080/admin/product/grain", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
@@ -40,7 +41,7 @@ export async function DELETE(request) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
 
-  const res = await fetch(`http://192.168.1.39:8080/admin/product/grain/${id}`, {
+  const res = await fetch(`http://localhost:8080/admin/product/grain/${id}`, {
     method: "DELETE",
   });
 
@@ -51,7 +52,7 @@ export async function PUT(req) {
   try {
     const body = await req.json();
 
-    const res = await fetch("http://192.168.1.39:8080/admin/product/grain", {
+    const res = await fetch("http://localhost:8080/admin/product/grain", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

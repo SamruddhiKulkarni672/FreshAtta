@@ -6,23 +6,27 @@ import {
     useAddGrainMutation,
     useDeleteGrainMutation,
     useUpdateGrainMutation,
+    useGetnutrientsQuery,
 } from "@/rtk/grainApi";
 import ProductTable from "@/components/ProductTable";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
-const NUTRIENT_KEYS = [
+const  NUTRIENT_KEY = [
     "protein",
     "carbohydrates",
     "sugars",
     "dietaryFiber",
     "saturatedFat",
     "transFat",
+    "FAT"
 ];
 
 const GrainsPage = () => {
     const { data: grainsData = [], isLoading, error: fetchError } = useGetGrainsQuery();
+const { data: nutrients = [], error: nutrientsfetchError, isLoading: nutrientsLoading } = useGetnutrientsQuery();
+
     const [addGrain] = useAddGrainMutation();
     const [updateGrain] = useUpdateGrainMutation();
     const [deleteGrain] = useDeleteGrainMutation();
@@ -32,13 +36,18 @@ const GrainsPage = () => {
     const [editingId, setEditingId] = useState(null);
     const [errorMessage, setErrorMessage] = useState("");
     const [fieldErrors, setFieldErrors] = useState({});
+    const [nutrient, setNutrient] = useState([]);
+
+    console.log("Nutrients loading:", nutrientsLoading);
+    console.log("Nutrients error:", nutrientsfetchError);
+    console.log("Nutrients data:", nutrients);
 
     const [form, setForm] = useState({
         grainName: "",
         grainDesc: "",
         actualPrice: "",
         available: true,
-        nutrientContent: Object.fromEntries(NUTRIENT_KEYS.map((key) => [key, ""])),
+        nutrientContent: Object.fromEntries(nutrient.map((key) => [key, ""])),
     });
 
     useEffect(() => {
@@ -50,13 +59,21 @@ const GrainsPage = () => {
         }
     }, [grainsData]);
 
+    useEffect(() => {
+        setNutrient(nutrients);
+
+
+         console.log("neutrients@@@@@@@@@@", nutrients)
+    }, [nutrients]);
+
+ 
     const resetForm = () => {
         setForm({
             grainName: "",
             grainDesc: "",
             actualPrice: "",
             available: true,
-            nutrientContent: Object.fromEntries(NUTRIENT_KEYS.map((key) => [key, ""])),
+            nutrientContent: Object.fromEntries(nutrient.map((key) => [key, ""])),
         });
         setEditingId(null);
         setShowForm(false);
@@ -147,7 +164,7 @@ const GrainsPage = () => {
             actualPrice: grain.actualPrice,
             available: grain.available,
             nutrientContent: Object.fromEntries(
-                NUTRIENT_KEYS.map((key) => [key, grain.nutrientContent?.[key] ?? ""])
+                nutrient.map((key) => [key, grain.nutrientContent?.[key] ?? ""])
             ),
         });
 
@@ -179,6 +196,12 @@ const GrainsPage = () => {
             {fetchError && (
                 <div className="bg-red-100 text-red-800 px-4 py-2 rounded-md">
                     Failed to fetch grains. Please check your connection or try again.
+                </div>
+            )}
+
+            {nutrientsfetchError && (
+                <div className="bg-red-100 text-red-800 px-4 py-2 rounded-md">
+                    Failed to fetch nutrients. Please check your connection or try again.
                 </div>
             )}
 
@@ -229,7 +252,7 @@ const GrainsPage = () => {
                             Nutrient Content (per 100g)
                         </label>
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                            {NUTRIENT_KEYS.map((key) => (
+                            {nutrient.map((key) => (
                                 <div key={key}>
                                     <label className="block text-xs font-medium text-gray-600 mb-1 capitalize">
                                         {key}
@@ -258,10 +281,7 @@ const GrainsPage = () => {
                         </div>
                     </div>
 
-                    <Button
-                        onClick={handleSubmit}
-                        className="md:col-span-2 bg-[#8dccc7]"
-                    >
+                    <Button onClick={handleSubmit} className="md:col-span-2 bg-[#8dccc7]">
                         {editingId ? "Update Grain" : "Submit"}
                     </Button>
                 </div>
