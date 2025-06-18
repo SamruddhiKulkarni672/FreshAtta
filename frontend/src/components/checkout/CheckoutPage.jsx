@@ -168,7 +168,7 @@ const CheckoutPage = () => {
         <div className="flex-1 space-y-6">
           <Card className="rounded-none sm:rounded-md">
             <CardHeader>
-              <h2 className="text-lg font-semibold">Your Personal Details</h2>
+              <h2 className="text-lg text-[14px] font-semibold">Your Personal Details</h2>
             </CardHeader>
             <CardContent className="space-y-6 bg-white">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -181,6 +181,7 @@ const CheckoutPage = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   error={errors.email}
+                   placeholder="Enter your email "
                   required
                 />
 
@@ -194,6 +195,7 @@ const CheckoutPage = () => {
                   onBlur={handleBlur}
                   error={errors.phone}
                   required
+                  placeholder="Enter your phone number"
                 />
               </div>
 
@@ -207,6 +209,7 @@ const CheckoutPage = () => {
                   onBlur={handleBlur}
                   error={errors.firstName}
                   required
+                  placeholder ="Enter your First Name"
                 />
 
                 <FormField
@@ -216,6 +219,7 @@ const CheckoutPage = () => {
                   value={form.lastName}
                   onChange={handleChange}
                   onBlur={handleBlur}
+                  placeholder="Enter your Last Name"
                 />
               </div>
 
@@ -243,6 +247,7 @@ const CheckoutPage = () => {
                   onBlur={handleBlur}
                   error={errors.city}
                   required
+                  placeholder="Enter Your City"
                 />
 
                 <FormField
@@ -253,6 +258,7 @@ const CheckoutPage = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   error={errors.zipCode}
+                  placeholder="Enter your zipcode"
                   required
                 />
 

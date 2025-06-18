@@ -13,8 +13,8 @@ export default function CartItem({ item }) {
 
   return (
     <div
-      className="flex items-center justify-between gap-4 border-2 border-[#EAE2E2] p-4 rounded-lg shadow-md"
-      style={{ boxShadow: "6px 6px 6px 0px #DFD8D8" }}
+      className="flex items-center justify-between gap-4 border-2 shadow-sm border-[#EAE2E2] p-4 rounded-lg "
+      // style={{ boxShadow: "6px 6px 6px 0px #DFD8D8" }}
     >
       <div className="flex w-[50%] items-center gap-4 cursor-pointer">
         <Image

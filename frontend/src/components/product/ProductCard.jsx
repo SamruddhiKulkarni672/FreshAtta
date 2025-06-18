@@ -16,8 +16,11 @@ const ProductCard = ({ product }) => {
   const dispath = useDispatch();
   const totalPrice = useSelector((state) => state.cart.totalPrice);
   const handleAddToCart = () => {
+    if (!added) {
+      dispath(addToCart(product));
+    }
     setAdded(true);
-    dispath(addToCart(product));
+    // dispath(addToCart(product));
 
     //router.push("/cart");
   };

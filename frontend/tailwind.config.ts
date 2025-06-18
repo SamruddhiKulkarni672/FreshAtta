@@ -12,7 +12,9 @@ export default {
       fontFamily: {
         inter: ["var(--font-inter)", "sans-serif"],
         poppins: ["var(--font-poppins)", "sans-serif"],
-        sans: ["var(--font-inter)", "sans-serif"], 
+        sans: ["var(--font-inter)", "sans-serif"],
+        clash: ['"Clash Grotesk"', "sans-serif"],
+        raleway: ["Raleway", "sans-serif"],
       },
 
       colors: {
@@ -26,6 +28,14 @@ export default {
         cartBackgroundColor: "#D2874D",
         serachBackgroundColor: "#F0F0F0",
         headerTextColor: "#242424",
+        productDetailPageText: "#382020",
+        productDetailDescriptionText: "#292929",
+        productDetailContentText: "#666666",
+        productDetailSizeborder: "#807C7C",
+        productDetailTextItem: "#4E4B4B",
+        productDetalbgOfButton: "#A0D4A39C",
+        shadowProductDetail: "[0_4px_4px_#00000040]",
+        cartShadow: "shadow-[4px_4px_4px_0px_#00000040]",
 
         chart: {
           "1": "hsl(var(--chart-1))",

@@ -1,4 +1,3 @@
-"use client";
 import CheckoutPage from "@/components/checkout/CheckoutPage";
 const CheckOutPage = () => {
   return (

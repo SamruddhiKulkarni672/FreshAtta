@@ -1,10 +1,11 @@
-import AboutPage from "@/components/about/AboutPage.jsx"
-export default function HomePage(){
-  return <div>
-    <AboutPage/>
-  </div>
+import AboutPage from "@/components/about/AboutPage.jsx";
+export default function HomePage() {
+  return (
+    <div>
+      <AboutPage />
+    </div>
+  );
 }
-
 
 // "use client";
 

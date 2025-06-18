@@ -1,4 +1,4 @@
-"use client"
+
 import OrderPage from "@/components/order/OrderPage"
 const OrdersPage = ()=>{
   return <div>

@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       <div className=" flex flex-col bg-[#FFFFFF] text-3xl h-auto min-h-[360px]">
-        <div className="flex justify-center  w-full">
+        <div className=" justify-center  w-full hidden lg:flex">
           <Carousel />
         </div>
         <div className="flex justify-center  w-full">
@@ -17,7 +17,6 @@ export default function Home() {
         <div>
           <AllProductsGrid products={products} />
         </div>
-        
       </div>
     </>
   );

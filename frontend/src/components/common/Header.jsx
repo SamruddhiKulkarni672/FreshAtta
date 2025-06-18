@@ -50,9 +50,9 @@ const Header = () => {
             <Link href="/about" className="hover:text-green-700 transition">
               About
             </Link>
-            <Link href="/blog" className="hover:text-green-700 transition">
+            {/* <Link href="/blog" className="hover:text-green-700 transition">
               Blog
-            </Link>
+            </Link> */}
             <Link href="/contact" className="hover:text-green-700 transition">
               Contact
             </Link>
@@ -160,13 +160,13 @@ const Header = () => {
           >
             About
           </Link>
-          <Link
+          {/* <Link
             href="/blog"
             className="block py-1  hover:text-green-700 transition"
             onClick={() => setIsMenuOpen(false)}
           >
             Blog
-          </Link>
+          </Link> */}
           <Link
             href="/contact"
             className="block py-1  hover:text-green-700 transition"
@@ -178,18 +178,56 @@ const Header = () => {
           <Link
             href="/cart"
             className="block py-2  hover:text-green-700 transition"
-             onClick={() => setIsMenuOpen(false)}
-          > Cart
+            onClick={() => setIsMenuOpen(false)}
+          >
+            {" "}
+            Cart
             {/* Cart ({products.length}) */}
           </Link>
-          <Link href="/login">
+          <div className="relative">
+            <Button
+              variant="destructive"
+              className="px-2 text-[14px] py-1 text-white rounded-lg flex items-center gap-1"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              Sign In
+              <RiArrowDropDownLine className="w-6 h-6" />
+            </Button>
+
+            {/* Simple Dropdown */}
+            {isDropdownOpen && (
+              <div className="absolute  mt-1 w-40 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50">
+                <Link
+                  href="/register"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    setIsDropdownOpen(false);
+                  }}
+                  className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 rounded-t-md"
+                >
+                  Create Account
+                </Link>
+                <Link
+                  href="/login"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    setIsDropdownOpen(false);
+                  }}
+                  className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 rounded-b-md"
+                >
+                  Sign In
+                </Link>
+              </div>
+            )}
+          </div>
+          {/* <Link href="/login">
             <Button
               variant="destructive"
               className="px-2 py-2 text-white rounded-lg"
             >
               Sign In
             </Button>
-          </Link>
+          </Link> */}
         </nav>
       )}
     </header>

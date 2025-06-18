@@ -1,4 +1,3 @@
-// components/form/FormField.jsx
 "use client";
 
 import React from "react";
@@ -19,6 +18,7 @@ export const FormField = ({
   className = "",
   textarea = false,
   rows = 3,
+  placeholder = "",
 }) => {
   const commonProps = {
     id,
@@ -26,6 +26,7 @@ export const FormField = ({
     value,
     onChange,
     onBlur,
+    placeholder,
     disabled,
     className: `w-full ${error ? "border-red-500" : ""} ${className}`,
   };
@@ -45,7 +46,7 @@ export const FormField = ({
           } ${className}`}
         />
       ) : (
-        <Input type={type} {...commonProps} />
+        <Input type={type} {...commonProps} className="text-sm" />
       )}
       {error && <p className="text-sm text-red-500">{error}</p>}
     </div>

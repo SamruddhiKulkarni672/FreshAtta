@@ -35,7 +35,7 @@ function Carousel() {
             key={index}
             src={img}
             alt={`slide-${index}`}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
+            className={`absolute inset-0 w-full lg:h-full lg:object-cover transition-opacity duration-700 ease-in-out ${
               index === current ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
           />
